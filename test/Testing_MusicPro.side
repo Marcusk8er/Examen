@@ -1,0 +1,145 @@
+{
+  "id": "af7f92be-8f0f-4a38-976a-f5319318c946",
+  "version": "2.0",
+  "name": "Testing_MusicPro",
+  "url": "http://127.0.0.1:8000/",
+  "tests": [{
+    "id": "baee296e-a647-4db9-8216-98ac41cb2667",
+    "name": "T1_Agregar_al_carrito",
+    "commands": [{
+      "id": "8aaa6c7a-fd60-4cb0-941e-27fbd8703dd8",
+      "comment": "Abrir página web",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "1378996d-056f-4c3e-af92-76790a3b76e8",
+      "comment": "Ajustar a pantalla completa",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "2b57bd2e-d088-4685-b3d2-11950f4d1e00",
+      "comment": "Click en \"Productos\"",
+      "command": "click",
+      "target": "linkText=Productos",
+      "targets": [
+        ["linkText=Productos", "linkText"],
+        ["css=.mx-2", "css:finder"],
+        ["xpath=//a[contains(text(),'Productos')]", "xpath:link"],
+        ["xpath=//div[@id='navbarNavAltMarkup']/div/a[2]", "xpath:idRelative"],
+        ["xpath=//a[contains(@href, '/productos/')]", "xpath:href"],
+        ["xpath=//a[2]", "xpath:position"],
+        ["xpath=//a[contains(.,'Productos')]", "xpath:innerText"]
+      ],
+      "value": "http://127.0.0.1:8000/Productos"
+    }, {
+      "id": "179e6037-b98b-40ac-9753-0aadbd67c8eb",
+      "comment": "Click en \"Agregar al carro\"",
+      "command": "click",
+      "target": "linkText=Agregar al carro",
+      "targets": [
+        ["linkText=Agregar al carro", "linkText"],
+        ["css=.card:nth-child(1) .btn", "css:finder"],
+        ["xpath=//a[contains(text(),'Agregar al carro')]", "xpath:link"],
+        ["xpath=//a[contains(@href, '/agregar/4/')]", "xpath:href"],
+        ["xpath=//div[2]/div/div/div/a", "xpath:position"],
+        ["xpath=//a[contains(.,'Agregar al carro')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "c7ab1183-5235-4721-884b-d0b3c86d67b3",
+      "comment": "Comprueba el nombre del producto Guitarra Vizcaya Castilla agregado",
+      "command": "assertText",
+      "target": "id=nombre",
+      "targets": [],
+      "value": "Guitarra Vizcaya Castilla"
+    }, {
+      "id": "b2041955-2f65-422a-bc25-0f5484ffb674",
+      "comment": "Comprueba la cantidad \"1\" agregada",
+      "command": "assertElementPresent",
+      "target": "id=cantidad",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "58474ad5-bd23-4de9-9954-74b20a962614",
+      "comment": "Cerrar página",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }, {
+    "id": "347df7fc-3270-4cc5-a21a-3af87ec67e01",
+    "name": "T2_Comprobar_dolar",
+    "commands": [{
+      "id": "34b8059c-dca8-4115-89bd-5c35da29470e",
+      "comment": "Abrir página web",
+      "command": "open",
+      "target": "http://127.0.0.1:8000/",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "5d470aa5-efe5-40cf-a8ba-154fe0d70c85",
+      "comment": "Ajustar a pantalla completa",
+      "command": "setWindowSize",
+      "target": "1936x1056",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f932fcf6-d1cf-4efb-9a4b-311b678a438e",
+      "comment": "Click en \"Carrito\"",
+      "command": "click",
+      "target": "css=.bi-cart-fill",
+      "targets": [
+        ["css=.bi-cart-fill", "css:finder"],
+        ["xpath=//a[4]/i", "xpath:position"]
+      ],
+      "value": "http://127.0.0.1:8000/carro/"
+    }, {
+      "id": "5f752535-32f6-4b5d-a560-55c8b876985a",
+      "comment": "Total carrito en CLP",
+      "command": "assertElementPresent",
+      "target": "id=total_carro",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "f7384282-df42-4a47-9ec4-a6e026b7d59e",
+      "comment": "Total carito en dolares",
+      "command": "assertElementPresent",
+      "target": "id=total_dolares",
+      "targets": [],
+      "value": ""
+    }, {
+      "id": "310de903-aa80-4e5b-8d72-8fa79f8fc6cb",
+      "comment": "Valor del dolar actual",
+      "command": "assertElementPresent",
+      "target": "id=valor_dolar",
+      "targets": [
+        ["css=.table:nth-child(4) td:nth-child(3)", "css:finder"],
+        ["xpath=//table[2]/tbody/tr[2]/td[3]", "xpath:position"],
+        ["xpath=//td[contains(.,'$905.32 USD')]", "xpath:innerText"]
+      ],
+      "value": ""
+    }, {
+      "id": "b2ebfa36-145e-4950-b573-2e3d837230c9",
+      "comment": "Cerrar página",
+      "command": "close",
+      "target": "",
+      "targets": [],
+      "value": ""
+    }]
+  }],
+  "suites": [{
+    "id": "a3b82b11-1e2f-4408-ada5-ae09a6dcb153",
+    "name": "Default Suite",
+    "persistSession": false,
+    "parallel": false,
+    "timeout": 300,
+    "tests": ["baee296e-a647-4db9-8216-98ac41cb2667"]
+  }],
+  "urls": ["http://127.0.0.1:8000/"],
+  "plugins": []
+}
