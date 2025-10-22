@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es">
+{% load static %}
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!--BOOTSTRAP-->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+  <!--ICONOS-->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.3/font/bootstrap-icons.css">
+  <!--FUENTES-->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Akshar:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Road+Rage&display=swap" rel="stylesheet">
+  <!--SCRIPT-->
+  <script src="https://kit.fontawesome.com/2c36e9b7b1.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"
+    defer></script>
+  <style>
+    .card-img-size {
+      width: 100%;
+      height: 15vw;
+      object-fit: cover;
+    }
+
+    .card-img-top {
+      object-fit: cover;
+    }
+  </style>
+  <title>Music Pro Productos</title>
+</head>
+
+<body style="font-family: 'Akshar'">
+  <!--HEADER COMIENZA-->
+  <header>
+  </header>
+  <!--HEADER TERMINA-->
+  <!--NAVBAR COMIENZA-->
+  <nav class="navbar navbar-expand-lg bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand text-light fs-3" style="font-family: 'Road Rage', cursive;" href="#">MusicPRO</a>
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <div class="navbar-nav">
+          <a class="nav-link active text-light mx-4" aria-current="page" href="{% url 'index' %}">Inicio</a>
+          <a class="nav-link text-light mx-2" href="{% url 'productos' %}">Productos</a>
+        </div>
+      </div>
+    </div>
+    {% if user.is_authenticated %}
+    <div style="display: flex">
+      <a class="nav-link text-light me-2" href="#"><i class="bi bi-person-check-fill"></i></a>
+      <a class="nav-link text-light me-3" href="#">{{user.username}}</a>
+      <a class="nav-link text-light me-5" href="{% url 'logout' %}"><i class="bi bi-person-x-fill"></i></a> 
+      {% else %}
+      <div style="display: flex;">
+        <a class="nav-link text-light me-3" href="{% url 'login' %}"><i class="bi bi-person-fill"></i></a>
+        <a class="nav-link text-light me-5" href="{% url 'registro'%}"><i class="bi bi-person-plus-fill"></i></a>
+      </div>
+      {% endif %}
+      <a class="nav-link text-light me-5" href="{% url 'carro' %}"><i class="bi bi-cart-fill"></i></a>
+    </div>
+  </nav>
+  <!--NAVBAR TERMINA-->
+  <!--MAIN COMIENZA-->
+  <main>
+    <div class="text-center mt-4">
+      <h2>Listado de productos</h2>
+    </div>
+    <div style="display: flex; flex-direction: row; flex-wrap: wrap; margin: 130px;">
+      {% for producto in productos %}
+      <div class="card" style="width: 18rem; margin: 13px;">
+        <img src="{{producto.img}}" class="card-img-top">
+        <div class="card-body">
+          <h5 class="card-text ">{{producto.nombre}}</h5>
+          <p class="card-text fs-6 m-0">Marca: {{producto.marca}}</p>
+          <p class="card-text fs-6">Valor: ${{producto.valor}} CLP</p>
+          <div style="margin-top: 5px;">
+            <a href="{% url 'Add' producto.id %}" class="btn btn-dark">Agregar al carro</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </main>
+  <!--MAIN TERMINA-->
+  <!--FOOTER COMIENZA-->
+  <footer class="bg-dark text-center text-white">
+    <!-- Grid container -->
+    <div class="container p-4 pb-0">
+      <!-- Section: Social media -->
+      <section class="mb-4">
+        <!-- Facebook -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+        <!-- Twitter -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-twitter"></i></a>
+
+        <!-- Instagram -->
+        <a class="btn btn-outline-light btn-floating m-1" href="#!" role="button"><i class="fab fa-instagram"></i></a>
+
+      </section>
+      <!-- Section: Social media -->
+    </div>
+    <!-- Grid container -->
+
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: black;">
+      © 2022 Copyright:
+      <a class="text-white" href="https://mdbootstrap.com/">MusicPro.cl</a>
+    </div>
+    <!-- Copyright -->
+  </footer>
+  <!--FOOTER TERMINA-->
+</body>
+
+</html>

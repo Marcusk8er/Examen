@@ -1,0 +1,22 @@
+from django.urls import path, include, re_path
+from .views import api_dolar, productos, agregar_producto,eliminar_producto, restar_producto, limpiar_carro, Registro, pedido
+from django.conf.urls.static import static
+from django.conf import settings
+
+from django.views.generic.base import TemplateView
+
+
+urlpatterns = [
+    path("", TemplateView.as_view(template_name="index.html"), name="index"),
+    path("registro",Registro,name="registro"),
+    path('accounts/',include('django.contrib.auth.urls')),
+    path('productos/', productos, name='productos'),
+    path('agregar/<int:producto_id>/', agregar_producto, name="Add"),
+    path('eliminar/<int:producto_id>/', eliminar_producto, name="Del"),
+    path('restar/<int:producto_id>/', restar_producto, name="Sub"),
+    path('limpiar/', limpiar_carro, name="CLS"),
+    path('carro/', api_dolar, name='carro'),
+    path('pedido/', pedido, name='pedido'),
+]
+
+if settings.DEBUG:urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
